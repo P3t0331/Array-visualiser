@@ -17,16 +17,16 @@ bool ok;
 QStringList arrayList;
 QMap <QString, int> arrayMap;
 QString text;
-void arrayWindow::foundArray(Pole *pole)
+void arrayWindow::foundArray(ArrayClass *Array)
 {
-    if(!arrayList.contains(pole->meno))
+    if(!arrayList.contains(Array->name))
     {
-        arrayList.append(pole->meno);
-        arrayMap[pole->meno] = id;
+        arrayList.append(Array->name);
+        arrayMap[Array->name] = id;
         ui->tableWidget->insertRow(id);
-        ui->tableWidget->setVerticalHeaderItem(id, new QTableWidgetItem(pole->data + " " + pole->meno + "[" + QString::number(pole->size) + "]"));
+        ui->tableWidget->setVerticalHeaderItem(id, new QTableWidgetItem(Array->data + " " + Array->name + "[" + QString::number(Array->size) + "]"));
         id++;
-        for (int i = 0; i < pole->size; i++)
+        for (int i = 0; i < Array->size; i++)
         {
             if (!ui->tableWidget->horizontalHeaderItem(i))
             {
@@ -35,63 +35,63 @@ void arrayWindow::foundArray(Pole *pole)
 
         }
     }
-    for (int i = 0; i < pole->size; i++)
+    for (int i = 0; i < Array->size; i++)
     {
         ui->tableWidget->setHorizontalHeaderItem(i, new QTableWidgetItem(QString::number(i)));
-        if (pole->type == 1)
+        if (Array->type == 1)
         {
-            if (ui->tableWidget->item(arrayMap[pole->meno], i) != NULL)
+            if (ui->tableWidget->item(arrayMap[Array->name], i) != NULL)
             {
-                if (ui->tableWidget->item(arrayMap[pole->meno], i)->text() != QString(*(pole->c + i)))
+                if (ui->tableWidget->item(arrayMap[Array->name], i)->text() != QString(*(Array->c + i)))
                 {
-                    ui->nameLabel->setText("Zmena na " + pole->meno +
-                    "[" + QString::number(pole->size) + "]" + " v " + QString::number(i) + " stlpci");
-                    ui->tableWidget->item(arrayMap[pole->meno], i)->setBackground(Qt::red);
-                    ui->tableWidget->item(arrayMap[pole->meno], i)->setText(QString(*(pole->c + i)));
-                    redRow = arrayMap[pole->meno];
+                    ui->nameLabel->setText("Zmena na " + Array->name +
+                    "[" + QString::number(Array->size) + "]" + " v " + QString::number(i) + " stlpci");
+                    ui->tableWidget->item(arrayMap[Array->name], i)->setBackground(Qt::red);
+                    ui->tableWidget->item(arrayMap[Array->name], i)->setText(QString(*(Array->c + i)));
+                    redRow = arrayMap[Array->name];
                     redColumn = i;
                 }
             }
             else
             {
-                ui->tableWidget->setItem(arrayMap[pole->meno], i, new QTableWidgetItem(QString(*(pole->c + i))));
+                ui->tableWidget->setItem(arrayMap[Array->name], i, new QTableWidgetItem(QString(*(Array->c + i))));
             }
 
         }
-        else if (pole->type == 2)
+        else if (Array->type == 2)
         {
-            if (ui->tableWidget->item(arrayMap[pole->meno], i) != NULL)
+            if (ui->tableWidget->item(arrayMap[Array->name], i) != NULL)
             {
-                if (ui->tableWidget->item(arrayMap[pole->meno], i)->text() != QString::number(*(pole->i + i)))
+                if (ui->tableWidget->item(arrayMap[Array->name], i)->text() != QString::number(*(Array->i + i)))
                 {
-                    ui->nameLabel->setText("Zmena na " + pole->meno + "[" + QString::number(pole->size) + "]" + " v " + QString::number(i) + " stlpci");
-                    ui->tableWidget->item(arrayMap[pole->meno], i)->setBackground(Qt::red);
-                    ui->tableWidget->item(arrayMap[pole->meno], i)->setText(QString::number(*(pole->i + i)));
-                    redRow = arrayMap[pole->meno];
+                    ui->nameLabel->setText("Zmena na " + Array->name + "[" + QString::number(Array->size) + "]" + " v " + QString::number(i) + " stlpci");
+                    ui->tableWidget->item(arrayMap[Array->name], i)->setBackground(Qt::red);
+                    ui->tableWidget->item(arrayMap[Array->name], i)->setText(QString::number(*(Array->i + i)));
+                    redRow = arrayMap[Array->name];
                     redColumn = i;
                 }
             }
             else
             {
-                ui->tableWidget->setItem(arrayMap[pole->meno], i, new QTableWidgetItem(QString::number(*(pole->i + i))));
+                ui->tableWidget->setItem(arrayMap[Array->name], i, new QTableWidgetItem(QString::number(*(Array->i + i))));
             }
         }
-        else if (pole->type == 3)
+        else if (Array->type == 3)
         {
-            if (ui->tableWidget->item(arrayMap[pole->meno], i) != NULL)
+            if (ui->tableWidget->item(arrayMap[Array->name], i) != NULL)
             {
-                if (ui->tableWidget->item(arrayMap[pole->meno], i)->text() != QString::number(*(pole->f + i)))
+                if (ui->tableWidget->item(arrayMap[Array->name], i)->text() != QString::number(*(Array->f + i)))
                 {
-                    ui->nameLabel->setText("Zmena na " + pole->meno + "[" + QString::number(pole->size) + "]" + " v " + QString::number(i) + " stlpci");
-                    ui->tableWidget->item(arrayMap[pole->meno], i)->setBackground(Qt::red);
-                    ui->tableWidget->item(arrayMap[pole->meno], i)->setText(QString::number(*(pole->f + i)));
-                    redRow = arrayMap[pole->meno];
+                    ui->nameLabel->setText("Zmena na " + Array->name + "[" + QString::number(Array->size) + "]" + " v " + QString::number(i) + " stlpci");
+                    ui->tableWidget->item(arrayMap[Array->name], i)->setBackground(Qt::red);
+                    ui->tableWidget->item(arrayMap[Array->name], i)->setText(QString::number(*(Array->f + i)));
+                    redRow = arrayMap[Array->name];
                     redColumn = i;
                 }
             }
             else
             {
-                ui->tableWidget->setItem(arrayMap[pole->meno], i, new QTableWidgetItem(QString::number(*(pole->f + i))));
+                ui->tableWidget->setItem(arrayMap[Array->name], i, new QTableWidgetItem(QString::number(*(Array->f + i))));
             }
 
         }
@@ -143,7 +143,7 @@ void arrayWindow::inputValue(Input *input)
 
 }
 
-void arrayWindow::vystupEnd()
+void arrayWindow::outputEnd()
 {
     ui->startButton->setEnabled(true);
     ui->continueButton->setEnabled(false);

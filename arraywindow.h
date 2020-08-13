@@ -10,7 +10,7 @@ namespace Ui {
 class arrayWindow;
 }
 
-class Pole
+class ArrayClass
 {
 private:
 
@@ -21,31 +21,31 @@ public:
     float *f;
     int type; // 1 = char, 2 = int, 3 = float
     int size;
-    QString meno;
+    QString name;
     QString data;
-    Pole(char *c, int s, QString m)
+    ArrayClass(char *c, int s, QString m)
     {
         this->c = c;
         type = 1;
         size = s;
-        meno = m;
+        name = m;
         data = "char";
 
     }
-    Pole(int *i, int s, QString m)
+    ArrayClass(int *i, int s, QString m)
     {
         this->i = i;
         type = 2;
         size = s;
-        meno = m;
+        name = m;
         data = "int";
     }
-    Pole(float *f, int s,  QString m)
+    ArrayClass(float *f, int s,  QString m)
     {
         this->f = f;
         type = 3;
         size = s;
-        meno = m;
+        name = m;
         data = "float";
     }
 
@@ -89,9 +89,9 @@ class arrayWindow : public QMainWindow
 public:
     explicit arrayWindow(QWidget *parent = 0);
     ~arrayWindow();
-    void foundArray(Pole *pole);
+    void foundArray(ArrayClass *pole);
     void inputValue(Input *input);
-    void vystupEnd();
+    void outputEnd();
 private slots:
 
     void on_continueButton_clicked();

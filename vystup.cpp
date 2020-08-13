@@ -7,28 +7,28 @@
 int mainProgram(arrayWindow *wnd)
 {
 	int i;
-int cislapole[10];
-char pismenapole[20];
-float desatinne[5];
+int numarray[10];
+char chararray[20];
+float floatarray[5];
 
-cislapole[5] = 2;
-wnd->foundArray(new Pole(cislapole, 10, "cislapole"));
-pismenapole[15] = 'x';
-wnd->foundArray(new Pole(pismenapole, 20, "pismenapole"));
-desatinne[1] = 2.5;
-wnd->foundArray(new Pole(desatinne, 5, "desatinne"));
+numarray[5] = 2;
+wnd->foundArray(new ArrayClass(numarray, 10, "numarray"));
+chararray[15] = 'x';
+wnd->foundArray(new ArrayClass(chararray, 20, "chararray"));
+floatarray[1] = 2.5;
+wnd->foundArray(new ArrayClass(floatarray, 5, "floatarray"));
 	for (i = 0; i < 5; i++)
 	{
-wnd->inputValue(new Input(desatinne, i));
-wnd->foundArray(new Pole(desatinne, 5, "desatinne"));
+wnd->inputValue(new Input(floatarray, i));
+wnd->foundArray(new ArrayClass(floatarray, 5, "floatarray"));
 	}
 	for (i = 0; i < 10; i++)
 	{
-wnd->inputValue(new Input(cislapole, i));
-wnd->foundArray(new Pole(cislapole, 10, "cislapole"));
+wnd->inputValue(new Input(numarray, i));
+wnd->foundArray(new ArrayClass(numarray, 10, "numarray"));
 	}
 	
 	
-wnd->vystupEnd();
+wnd->outputEnd();
 return 0;
 }
